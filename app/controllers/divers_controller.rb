@@ -2,12 +2,12 @@ class DiversController < ApplicationController
   before_action :authenticate_diver!, except: [:index]
 
   def index
-    @divers = Diver.all
+    # @divers = Diver.all
   end
 
-  def show
-    @diver = Diver.find(params[:id])
-  end
+  # def show
+  #   @diver = Diver.find(params[:id])
+  # end
 
   private
 

@@ -3,5 +3,7 @@
   <%= link_to 'Logged In [click to logout]', destroy_diver_session_path, :method => :delete %>
 <% else %>
   <p>You are not signed in.</p>
-  <%= link_to 'Login', new_diver_session_path %>
+  <div class="actions">
+  <%= link_to 'Login', new_diver_session_path, id: "btn" %>
+  </div>
 <% end %>

@@ -9,6 +9,16 @@
   </div>
 
   <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true%>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true%>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -21,8 +31,34 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :certification_level %><br />
+    <%= f.radio_button(:certification, 0) %>
+    <%= f.label(:certification_none, "snorkel") %>
+    <%= f.radio_button(:certification, 1, :checked => true) %>
+    <%= f.label(:certification_ow, "Open Water") %>
+    <%= f.radio_button(:certification, 2) %>
+    <%= f.label(:certification_aow, "Advanced Open Water") %>
+    <%= f.radio_button(:certification, 3) %>
+    <%= f.label(:certification_rsc, "Rescue") %>
+    <%= f.radio_button(:certification, 4) %>
+    <%= f.label(:certification_dm, "Dive Master") %>
+    <%= f.radio_button(:certification, 5) %>
+    <%= f.label(:certification_ai, "Asst. Instr.") %>
+    <%= f.radio_button(:certification, 6) %>
+    <%= f.label(:certification_inst, "Instructor") %>
+  </div>
+
+  <div class="field">
+    <%= f.label :metric_or_standard %><br />
+    <%= f.radio_button :metric, true, :checked => true %>
+    <%= f.label :metric_true, "km / C / 24hr" %>
+    <%= f.radio_button :metric, false %>
+    <%= f.label :metric_false, "ml / F / 12hr" %>
+  </div>
+
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", id: "btn" %>
   </div>
 <% end %>
 

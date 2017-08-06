@@ -1,0 +1,104 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true%>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autofocus: true%>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :certification_level %><br />
+    <%= f.radio_button(:certification, "none") %>
+    <%= f.label(:certification, "snorkel") %>
+    <%= f.radio_button(:certification, "ow", :checked => true) %>
+    <%= f.label(:certification, "Open Water") %>
+    <%= f.radio_button(:certification, "aow") %>
+    <%= f.label(:certification, "Advanced Open Water") %>
+    <%= f.radio_button(:certification, "rsc") %>
+    <%= f.label(:certification, "Rescue") %>
+    <%= f.radio_button(:certification, "dm") %>
+    <%= f.label(:certification, "Dive Master") %>
+    <%= f.radio_button(:certification, "ai") %>
+    <%= f.label(:certification, "Asst. Instr.") %>
+    <%= f.radio_button(:certification, "inst") %>
+    <%= f.label(:certification, "Instructor") %>
+  </div>
+<!--   <div class="field">
+    <%= f.label :certification_level %><br />
+    <%= radio_button_tag(:certification, "none") %>
+    <%= label_tag(:certification_none, "snorkel") %>
+    <%= radio_button_tag(:certification, "ow", true) %>
+    <%= label_tag(:certification_ow, "Open Water") %>
+    <%= radio_button_tag(:certification, "aow") %>
+    <%= label_tag(:certification_aow, "Advanced Open Water") %>
+    <%= radio_button_tag(:certification, "rsc") %>
+    <%= label_tag(:certification_rsc, "Rescue") %>
+    <%= radio_button_tag(:certification, "dm") %>
+    <%= label_tag(:certification_dm, "Dive Master") %>
+    <%= radio_button_tag(:certification, "ai") %>
+    <%= label_tag(:certification_ai, "Asst. Instr.") %>
+    <%= radio_button_tag(:certification, "inst") %>
+    <%= label_tag(:certification_inst, "Instructor") %>
+  </div>
+ -->
+<!--   <div class="field">
+    <%= f.label :metric_or_standard %><br />
+    <%= radio_button_tag(:metric, true, true) %>
+    <%= label_tag(:metric_true, "km / C / 24hr") %>
+    <%= radio_button_tag(:metric, false) %>
+    <%= label_tag(:metric_false, "ml / F / 12hr") %>
+  </div>
+ -->
+<!--   <div class="field">
+    <%= f.label :metric_or_standard %><br />
+    <%= f.radio_button :metric, true %> km / C / 24hr
+    <%= f.radio_button :metric, false %> ml / F / 12hr
+  </p>
+ -->
+   <div class="field">
+    <%= f.label :metric_or_standard %><br />
+    <%= f.radio_button :metric, "true", :checked => true %>
+    <%= f.label :metric_true, "km / C / 24hr" %>
+    <%= f.radio_button :metric, "false" %>
+    <%= f.label :metric_false, "ml / F / 12hr" %>
+  </div>
+
+<!--   <%= f.radio_button(:option, "option1") %>
+  <%= f.label(:option_option1, "option 1") %>
+  <br />
+  <%= f.radio_button(:option, "option2") %>
+  <%= f.label(:option_option2, "option 2") %>
+ -->
+
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

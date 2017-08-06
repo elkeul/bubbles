@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170804224610) do
+ActiveRecord::Schema.define(version: 20170806015629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dive_types", force: :cascade do |t|
+    t.string "activity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity"], name: "index_dive_types_on_activity", unique: true
+  end
 
   create_table "divers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,6 +35,10 @@ ActiveRecord::Schema.define(version: 20170804224610) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "certification", default: 0
+    t.boolean "metric", default: true
     t.index ["email"], name: "index_divers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_divers_on_reset_password_token", unique: true
   end
