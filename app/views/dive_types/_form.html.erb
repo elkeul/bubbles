@@ -1,0 +1,19 @@
+<%= form_for :dive_type, url: {controller: 'dive_types', action: action}, method: method_var do |f| %>
+  <% if @dive_type.errors.any? %>
+    <div id="errors">
+      <h2><%= pluralize(@dive_type.errors.count, "error") %> prevented this dive_type from saving </h2>
+      <ul>
+        <% @dive_type.errors.full_messages.each do |msg| %>
+          <li> <%= msg %></li> 
+        <% end %> 
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :activity %> <br>
+    <%= f.text_field :activity%>
+  </p>
+
+  <%= f.submit "Save Dive type", id: "btn" %>
+<% end %>

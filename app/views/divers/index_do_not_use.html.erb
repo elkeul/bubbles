@@ -1,0 +1,8 @@
+<h1> This is Diver Index! </h1>
+
+<% @divers.each do |diver| %>
+<div class ="diver_wrapper">
+  <h2 class = "email"> <%= link_to diver.email, controller:'divers', action:'show', id:diver.id %></h2>
+  <p> <%= diver.id %> / <%= diver.created_at.strftime("%B, %d, %Y") %></p>
+</div>
+<% end %>
