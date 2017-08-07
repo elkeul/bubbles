@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170806015629) do
+ActiveRecord::Schema.define(version: 20170807060615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,4 +43,27 @@ ActiveRecord::Schema.define(version: 20170806015629) do
     t.index ["reset_password_token"], name: "index_divers_on_reset_password_token", unique: true
   end
 
+  create_table "dives", force: :cascade do |t|
+    t.integer "dive_number"
+    t.date "dive_date"
+    t.string "location"
+    t.decimal "latitude", precision: 5, scale: 2
+    t.decimal "longitude", precision: 5, scale: 2
+    t.time "time_in"
+    t.time "time_out"
+    t.integer "depth"
+    t.integer "safety_stop_minutes"
+    t.integer "pressure_in"
+    t.integer "pressure_out"
+    t.integer "temperature_air"
+    t.integer "temperature_water"
+    t.string "buddies"
+    t.text "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "diver_id"
+    t.index ["diver_id"], name: "index_dives_on_diver_id"
+  end
+
+  add_foreign_key "dives", "divers"
 end

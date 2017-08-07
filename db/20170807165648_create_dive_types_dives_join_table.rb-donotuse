@@ -1,0 +1,7 @@
+class CreateDiveTypesDivesJoinTable < ActiveRecord::Migration[5.1]
+  def change
+    create_join_table :dive_types, :dives do |t|
+      t.index [:dive_type_id, :dive_id]
+    end
+  end
+end
