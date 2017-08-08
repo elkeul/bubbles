@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @dives = Dife.all.order(id: :desc)
+    @dives = Dive.all.order(id: :desc)
   end
 end

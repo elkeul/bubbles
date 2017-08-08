@@ -1,4 +1,4 @@
-class Dife < ApplicationRecord
+class Dive < ApplicationRecord
   validates_presence_of :location, length: { minimum: 1 }
   validates :dive_number, presence: true
   validates :dive_date, presence: true

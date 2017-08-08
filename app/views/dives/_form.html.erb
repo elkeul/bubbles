@@ -5,7 +5,7 @@
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 6,
-            center: {lat: <%= dife_lat %>, lng: <%= dife_long %>}
+            center: {lat: <%= dive_lat %>, lng: <%= dive_long %>}
         });
 
         map.addListener('click', function(e) {
@@ -24,8 +24,8 @@
 
             saveMarker = marker;
 
-            $('input[name="dife[latitude]"]').val(e.latLng.lat());
-            $('input[name="dife[longitude]"]').val(e.latLng.lng());
+            $('input[name="dive[latitude]"]').val(e.latLng.lat());
+            $('input[name="dive[longitude]"]').val(e.latLng.lng());
         });
     }
 
@@ -42,12 +42,12 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
 </script>
 
-<%= form_for :dife, url: {controller: 'dives', action: action}, method: method_var do |f| %>
-  <% if @dife.errors.any? %>
+<%= form_for :dive, url: {controller: 'dives', action: action}, method: method_var do |f| %>
+  <% if @dive.errors.any? %>
     <div id="errors">
-      <h2><%= pluralize(@dife.errors.count, "error") %> prevented this dive from saving </h2>
+      <h2><%= pluralize(@dive.errors.count, "error") %> prevented this dive from saving </h2>
       <ul>
-        <% @dife.errors.full_messages.each do |msg| %>
+        <% @dive.errors.full_messages.each do |msg| %>
           <li> <%= msg %></li> 
         <% end %> 
       </ul>
@@ -59,13 +59,22 @@
     <%= f.text_field :longitude, placeholder: "longitude" %>
   </p>
   <p>
-    <%= f.label :location %> <br>
-    <%= f.text_field :location%>
+    <%= f.label :dive_number %> <%= f.number_field :dive_number%> <%= f.label :dive_date %> <%= f.date_field :dive_date%>
   </p>
-
   <p>
-  <%= f.label :comments %><br>
-  <%= f.text_area :comments %> 
+    <%= f.label :location %> <%= f.text_field :location%> <%= f.label :time_in %> <%= f.time_field :time_in%> <%= f.label :time_out %> <%= f.time_field :time_out%>
+  </p>
+  <p>
+    <%= f.label :depth %> <%= f.number_field :depth%> <%= f.label :safety_stop_minutes %> <%= f.number_field :safety_stop_minutes%>
+  </p>
+  <p>
+    <%= f.label :pressure_in %> <%= f.number_field :pressure_in%> <%= f.label :pressure_out %> <%= f.number_field :pressure_out%>
+  </p>
+  <p>
+    <%= f.label :temperature_air %> <%= f.number_field :temperature_air%> <%= f.label :temperature_water %> <%= f.number_field :temperature_water%>
+  </p>
+  <p>
+  <%= f.label :comments %> <%= f.text_area :comments %> <%= f.label :buddies %> <%= f.text_field :buddies %> 
   </p>
 
   <%= f.submit "Save Dive", id: "btn" %>

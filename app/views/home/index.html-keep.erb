@@ -5,7 +5,7 @@
     // change locationS to location
     var locations = [
         <% @dives.each do |dive| %>
-        [<%= dive.latitude%>, <%= dive.longitude%>, '<%= dive.location%> ', '<%= dive.comments[0..199]%>... <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %>'],
+        [<%= dive.latitude%>, <%= dive.longitude%>, '<%= dive.location%> ', '<%= dive.comments%> <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %>'],
         <% end %>
     ]
 
@@ -13,8 +13,7 @@
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 2,
-            center: {lat: 20, lng:0}
-            // center: {lat: locations[0][0], lng: locations[0][1]}
+            center: {lat: locations[0][0], lng: locations[0][1]}
         });
 
         // Create an array of alphabetical characters used to label the markers.
@@ -27,7 +26,7 @@
 
         var infoWindows = locations.map(function(location){
             return new google.maps.InfoWindow({
-                content: location[3],
+                content: location[3] ,
                 maxWidth: 200
             })
         });
@@ -60,3 +59,14 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
 </script>
+
+<% @dives.each do |dive| %>
+    <div class ="dive_wrapper">
+      <h2 class = "Location"> <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %></h2>
+      <!-- user_link is used to create a link to the user profile -->
+      <% diver_link = dive.diver.first_name + ' ' + dive.diver.last_name %>
+      <p class="date"><%= dive.created_at.strftime("%B %d, %Y") %> | By: <%= link_to diver_link, controller:'divers', action: 'show', id: dive.diver_id %> </p>
+      <p class = "body"> <%=dive.comments %> </p>
+
+    </div>
+<% end %>
