@@ -1,0 +1,78 @@
+<div id="map"></div>
+<script>
+    function initMap() {
+        var saveMarker = null;
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 6,
+            center: {lat: <%= dife_lat %>, lng: <%= dife_long %>}
+        });
+
+        map.addListener('click', function(e) {
+//            placeInfoWindow(e.latLng, map);
+            if (saveMarker !== null){
+                saveMarker.setMap(null);
+                saveMarker = null;
+            }
+            var marker = new google.maps.Marker({
+                position: {lat: e.latLng.lat(), lng: e.latLng.lng()},
+                icon: 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png',
+                animation: google.maps.Animation.BOUNCE,
+//                animation: google.maps.Animation.DROP,
+                map: map
+            });
+
+            saveMarker = marker;
+
+            $('input[name="dife[latitude]"]').val(e.latLng.lat());
+            $('input[name="dife[longitude]"]').val(e.latLng.lng());
+        });
+    }
+
+    // function placeInfoWindow(latLng, map) {
+    //     var infoWindow = new google.maps.InfoWindow;
+    //     // Replace the info window's content and position.
+    //     infoWindow.setContent('Clicked location:<br>Lat: ' + latLng.lat() + '<br>Lng: ' + latLng.lng());
+    //     infoWindow.setPosition(latLng);
+    //     infoWindow.open(map);
+    //     map.panTo(latLng);
+    // }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
+</script>
+
+<%= form_for :dife, url: {controller: 'dives', action: action}, method: method_var do |f| %>
+  <% if @dife.errors.any? %>
+    <div id="errors">
+      <h2><%= pluralize(@dife.errors.count, "error") %> prevented this dive from saving </h2>
+      <ul>
+        <% @dife.errors.full_messages.each do |msg| %>
+          <li> <%= msg %></li> 
+        <% end %> 
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.text_field :latitude, placeholder: "latitude" %>
+    <%= f.text_field :longitude, placeholder: "longitude" %>
+  </p>
+  <p>
+    <%= f.label :location %> <br>
+    <%= f.text_field :location%>
+  </p>
+
+  <p>
+  <%= f.label :comments %><br>
+  <%= f.text_area :comments %> 
+  </p>
+
+  <%= f.submit "Save Dive", id: "btn" %>
+<% end %>
+
+<!--   validates :dive_number, presence: true
+  validates :dive_date, presence: true
+  validates :time_in, presence: true
+  validates :time_out, presence: true
+  validates :depth, presence: true -->

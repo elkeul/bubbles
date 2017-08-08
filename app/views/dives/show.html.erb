@@ -1,0 +1,45 @@
+<head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map2 {
+        height: 40%;
+        width: 40%;
+      }
+    </style>
+</head>
+
+<h2> Dive Location: <%= @dife.location %> </h2>
+
+<div id="map2"></div>
+<script>
+    var dife_latlng = {lat: <%= @dife.latitude%>, lng: <%= @dife.longitude%>}
+    var dife_location = '<%= @dife.location%>'
+
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map2'), {
+        zoom: 4,
+        center: dife_latlng
+        });
+
+    var difeMarker = new google.maps.Marker({
+      position: dife_latlng,
+      title: dife_location,
+      map: map
+      });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
+</script>
+
+<p>Dive Comments: <%= @dife.comments %> </p>
+Submitted <%= time_ago_in_words(@dife.created_at) %> ago
+<br/>
+<p class="date">
+    <% if diver_signed_in? && current_diver == @dife.diver%>
+
+    | <%= link_to "Edit", edit_diver_dife_path(@dife.diver_id, @dife.id) %>
+    | <%= link_to "Delete", diver_dife_path(@dife.diver_id, @dife.id), method: :delete %>
+  <% end %>
+</p>

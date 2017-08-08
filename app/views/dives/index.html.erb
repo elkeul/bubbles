@@ -1,0 +1,9 @@
+<h1> This is Dive Index! </h1>
+
+<% @dives.each do |dife| %>
+<div class ="dife_wrapper">
+  <h2 class = "Location"> <%= link_to dife.location, controller:'dives', action:'show', diver_id: dife.diver_id, id:dife.id %></h2>
+  <p class = "Comments"> <%=dife.comments %> </p>
+  <p class="date"> <%= dife.created_at.strftime("%B, %d, %Y") %></p>
+</div>
+<% end %>
