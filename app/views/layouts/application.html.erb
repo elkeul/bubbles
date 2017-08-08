@@ -4,16 +4,64 @@
     <title>Bubbles</title>
     <%= csrf_meta_tags %>
 
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 75%;
+        width: 75%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 50px;
+        padding: 0;
+      }
+    </style>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+    crossorigin="anonymous"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="full-page.css">
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+<!--     <section class="fp-intro">
+      <div class="fp-inner">
+          <div class="fp-content">
+              <h1>blown bubble (b)log</h1>
+              <a class="fp-btn" href="#">Get Started</a>
+          </div>
+      </div>
+    </section>
+ -->
+    <nav class="navbar navbar-light bg-faded">
+      <div class="container navbar-container">
+        <%= link_to image_tag("bubl.png",class:'logo', width: '140', height: '60', alt: ''), root_path %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+        <ul class="nav navbar-nav navbar-right">
 
+          <!--<li><a href="/users/new"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
+          <% if diver_signed_in? %>
+              <li><a rel='nofollow' href="<%= new_diver_dife_path(current_diver.id)%>"><span class="glyphicon glyphicon-pencil"> </span> Make New Post </a></li>
+              <li><a rel='nofollow' href="<%= destroy_diver_session_path %>" data-method="delete"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <% else %>
+              <li><a href="<%= new_diver_registration_path %>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              <li><a href="<%= diver_session_path %>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
     <%= yield %>
-
   </body>
 </html>
