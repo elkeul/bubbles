@@ -1,3 +1,3 @@
-<h1>New Dive</h1>
+<h1>new dive <%= current_diver.last_dive_number + 1%></h1>
 
 <%= render partial:'form', locals: {action: 'create', method_var: 'post', dive_lat: 20.5, dive_long: -87} %>

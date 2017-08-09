@@ -15,6 +15,8 @@ class DivesController < ApplicationController
 
   def create
     @dive = Dive.new(dive_params.merge({diver_id: current_diver.id}))
+    @dive.dive_number = current_diver.last_dive_number + 1
+    @dive.bottom_time = (@dive.time_out - @dive.time_in ) / 60
     if @dive.save
       flash[:notice] = "Dive successfully created!"
       redirect_to "/divers/#{current_diver.id}/dives/#{@dive.id}"

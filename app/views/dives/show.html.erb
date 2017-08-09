@@ -1,57 +1,51 @@
 <head>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map2 {
-        height: 40%;
-        width: 40%;
-      }
-    </style>
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map2 {
+      height: 40%;
+      width: 40%;
+    }
+  </style>
 </head>
 
-<h2> Dive Location: <%= @dive.location %> </h2>
+<h2> location: <%= @dive.location %> </h2>
 
 <div id="map2"></div>
 <script>
-    var dive_latlng = {lat: <%= @dive.latitude%>, lng: <%= @dive.longitude%>}
-    var dive_location = '<%= @dive.location%>'
+  var dive_latlng = {lat: <%= @dive.latitude%>, lng: <%= @dive.longitude%>}
+  var dive_location = '<%= @dive.location%>'
 
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('map2'), {
-        zoom: 4,
-        center: dive_latlng
-        });
-
-    var diveMarker = new google.maps.Marker({
-      position: dive_latlng,
-      title: dive_location,
-      map: map
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map2'), {
+      zoom: 4,
+      center: dive_latlng
       });
-    }
+
+  var diveMarker = new google.maps.Marker({
+    position: dive_latlng,
+    title: dive_location,
+    map: map
+    });
+  }
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
 </script>
 
-<% duration_in_sec = (@dive.time_out - @dive.time_in).to_i%>
-
-<% bottom_time = "#{(duration_in_sec / 60 )}"%>
-
-  <p>Dive Number: <%= @dive.dive_number%> Date: <%= @dive.dive_date%></p>
-  <p>Location: <%= @dive.location%> Latitude: <%= @dive.latitude%> Longitude: <%= @dive.longitude%></p>
-  <p>Time In: <%= @dive.time_in.to_s(:time)%> Time Out: <%= @dive.time_out.to_s(:time)%> Bottom time: <%=bottom_time%> min</p>
-  <p>Depth: <%= @dive.depth%> Safety Stop: <%= @dive.safety_stop_minutes%> min</p>
-  <p>Pressure In: <%= @dive.pressure_in%> Out: <%= @dive.pressure_out%> </p>
-  <p>Temperature Air: <%= @dive.temperature_air%> Water: <%= @dive.temperature_water%> </p>
-
+<p>Dive Number: <%= @dive.dive_number%> Date: <%= @dive.dive_date%></p>
+<p>Location: <%= @dive.location%> Latitude: <%= @dive.latitude%> Longitude: <%= @dive.longitude%></p>
+<p>Time In: <%= @dive.time_in.to_s(:time)%> Time Out: <%= @dive.time_out.to_s(:time)%> Bottom time: <%=@dive.bottom_time%> min</p>
+<p>Depth: <%= @dive.depth%> Safety Stop: <%= @dive.safety_stop_minutes%> min</p>
+<p>Pressure In: <%= @dive.pressure_in%> Out: <%= @dive.pressure_out%> Temperature Air: <%= @dive.temperature_air%> Water: <%= @dive.temperature_water%> </p>
 <p>Buddies: <%= @dive.buddies %> </p>
 <p>Comments: <%= @dive.comments %> </p>
 Submitted <%= time_ago_in_words(@dive.created_at) %> ago
 <br/>
 <p class="date">
-    <% if diver_signed_in? && current_diver == @dive.diver%>
+  <% if diver_signed_in? && current_diver == @dive.diver%>
 
-    | <%= link_to "Edit", edit_diver_dive_path(@dive.diver_id, @dive.id) %>
-    | <%= link_to "Delete", diver_dive_path(@dive.diver_id, @dive.id), method: :delete %>
+  | <%= link_to "Edit", edit_diver_dive_path(@dive.diver_id, @dive.id) %>
+  | <%= link_to "Delete", diver_dive_path(@dive.diver_id, @dive.id), method: :delete %> |
   <% end %>
 </p>

@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+
+  authenticated :user do
+    root 'divers#index', as: :root #-> if user is logged in
+    resources :divers #-> ONLY available for logged in users
+  end
+
+  unauthenticated :user do
+    root 'home#index', as: :unauthenticated #-> if user is not logged in
+  end
+
+  #root to: 'home#index'
   #root to: 'layouts#application'
 
   devise_for :divers
