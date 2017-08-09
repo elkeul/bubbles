@@ -50,6 +50,14 @@
         <%= f.label(:certification_inst, "Instructor") %>
       </div>
 
+      <div class="form-group field">
+        <%= f.label :metric_or_standard %><br />
+        <%= f.radio_button :metric, true, :checked => true %>
+        <%= f.label :metric_true, "km / C / 24hr" %>
+        <%= f.radio_button :metric, false %>
+        <%= f.label :metric_false, "ml / F / 12hr" %>
+      </div>
+
       <div class="form-group actions">
         <%= f.submit "Sign up", id: "btn", class: "form-control"%>
       </div>
