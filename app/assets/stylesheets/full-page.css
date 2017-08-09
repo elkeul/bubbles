@@ -69,7 +69,8 @@
   }
   #map {
     height: 50% !important;
-    width: 100% !important;
+    width: 80% !important;
+    margin-left: 10% !important;
   }
 /*  p {
     font-size: 100%;
