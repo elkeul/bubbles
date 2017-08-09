@@ -67,6 +67,10 @@
     font-size: 110%;
     padding: 7px 15px;
   }
+  #map {
+    height: 50% !important;
+    width: 100% !important;
+  }
 /*  p {
     font-size: 100%;
     line-height: 130%;
