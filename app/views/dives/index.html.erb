@@ -1,9 +1,8 @@
-<h1>Dive Index</h1>
+<h1>dives index</h1>
 
 <% @dives.each do |dive| %>
 <div class ="dive_wrapper">
   <h2 class = "Location"> <%= dive.dive_number%> <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %></h2>
-  <p class = "Comments"> <%=dive.comments %> </p>
-  <p class="date"> <%= dive.created_at.strftime("%B, %d, %Y") %></p>
+  <p class="date"> <%= dive.created_at.strftime("%B %d, %Y") %> Bottom Time <%=dive.bottom_time %> Depth <%=dive.depth%></p>
 </div>
 <% end %>
