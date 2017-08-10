@@ -1,4 +1,4 @@
-/assets/stylesheets/application.css
+/*/assets/stylesheets/application.css*/
 /* Adding a comment to force a new digest and expire cached assets in browsers */
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -28,10 +28,9 @@ html, body {
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
 #map-bubl {
-/*  height: calc(100% - 50px);
-*/
-  height: 100%;
-  width: 100%;
+  height: calc(100% - 50px);
+/*  height: 100%;
+*/  width: 100%;
 }
 #map-bubl-dive {
   height: 40%;
