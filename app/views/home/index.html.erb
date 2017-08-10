@@ -1,8 +1,7 @@
 <h1 class="welcome"> welcome to bubl</h1>
 
-<div id="map"></div>
+<div id="map-bubl"></div>
 <script>
-    // change locationS to location
     var locations = [
         <% @dives.each do |dive| %>
         [<%= dive.latitude%>, <%= dive.longitude%>, '<%= dive.location%> ', '<%= dive.comments[0..199]%>... <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %>'],
@@ -10,11 +9,9 @@
     ]
 
     function initMap() {
-
-        var map = new google.maps.Map(document.getElementById('map'), {
+        var map = new google.maps.Map(document.getElementById('map-bubl'), {
             zoom: 2,
             center: {lat: 20, lng:0}
-            // center: {lat: locations[0][0], lng: locations[0][1]}
         });
 
         // Create an array of alphabetical characters used to label the markers.
@@ -53,7 +50,6 @@
         var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
-
 </script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 </script>

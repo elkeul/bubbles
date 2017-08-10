@@ -1,12 +1,16 @@
 <% certs = ["snorkel", "open water", "advanced open water", "rescue", "dive master", "assistant instructor", "instructor"] %>
 
-<h2> diver id: <%= @diver.id %> / email: <%= @diver.email %> </h2>
-
-  <p>name: <%= @diver.first_name %> <%= @diver.last_name %> </p>
-  <p>certification: <%= certs[@diver.certification] %> </p>
-  <br>
-  <p>last dive number: <%= @diver.last_dive_number %> </p>
-  <p>total bottom time: <%= @diver.total_bottom_time %> </p>
-  <br>
-  submitted <%= time_ago_in_words(@diver.created_at) %> ago
-<br/>
+<div class="row">
+  <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+    <h2> diver id: <%= @diver.id %></h2>
+    <h2> email: <%= @diver.email %> </h2>
+    <br>
+    <p>name: <%= @diver.first_name %> <%= @diver.last_name %> </p>
+    <p>certification: <%= certs[@diver.certification] %> </p>
+    <br>
+    <p>last dive number: <%= @diver.last_dive_number %> </p>
+    <p>total bottom time: <%= @diver.total_bottom_time %> </p>
+    <br>
+    submitted <%= time_ago_in_words(@diver.created_at) %> ago
+  </div>
+</div>
