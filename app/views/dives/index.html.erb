@@ -1,8 +1,12 @@
-<h1>dives index</h1>
+<div class="row">
+  <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
+    <h1>dives index</h1>
 
-<% @dives.each do |dive| %>
-<div class ="dive_wrapper">
-  <h2 class = "Location"> <%= dive.dive_number%> <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %></h2>
-  <p class="date"> <%= dive.dive_date.strftime("%B %d, %Y") %> Depth <%=dive.depth%> Bottom Time <%=dive.bottom_time %></p>
+    <% @dives.each do |dive| %>
+      <div class ="dive_wrapper">
+        <h2 class = "Location"> <%= dive.dive_number%> <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %></h2>
+        <p class="date"> <%= dive.dive_date.strftime("%B %d, %Y") %> Depth <%=dive.depth%> Bottom Time <%=dive.bottom_time %></p>
+      </div>
+    <% end %>
+  </div>
 </div>
-<% end %>

@@ -1,63 +1,61 @@
-<head>
-  <style>
-    /* Always set the map height explicitly to define the size of the div
-     * element that contains the map. */
-    #map2 {
-      height: 40%;
-      width: 40%;
-    }
-  </style>
-</head>
-
 <div class="row">
   <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-
     <h2> location: <%= @dive.location %> </h2>
-
   </div>
 </div>
-    <div id="map2"></div>
-    <script>
-      var dive_latlng = {lat: <%= @dive.latitude%>, lng: <%= @dive.longitude%>}
-      var dive_location = '<%= @dive.location%>'
+<div id="map-bubl-dive">
+  <script>
+    var dive_latlng = {lat: <%= @dive.latitude%>, lng: <%= @dive.longitude%>}
+    var dive_location = '<%= @dive.location%>'
 
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map2'), {
-          zoom: 4,
-          center: dive_latlng
-          });
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map-bubl-dive'), {
+        zoom: 4,
+        center: dive_latlng
+      });
 
       var diveMarker = new google.maps.Marker({
         position: dive_latlng,
         title: dive_location,
         map: map
-        });
-      }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
-    </script>
-    
+      });
+    }
+  </script>
+  <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
+  </script>
+</div>    
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+      <p>Dive Number: <%= @dive.dive_number%> Date: <%= @dive.dive_date%></p>
+      <p>Location: <%= @dive.location%> Latitude: <%= @dive.latitude%> Longitude: <%= @dive.longitude%></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+      <p>Time In: <%= @dive.time_in.to_s(:time)%> Time Out: <%= @dive.time_out.to_s(:time)%> Bottom time: <%=@dive.bottom_time%> min</p>
+      <p>Depth: <%= @dive.depth%> Safety Stop: <%= @dive.safety_stop_minutes%> min</p>
+      <p>Pressure In: <%= @dive.pressure_in%> Out: <%= @dive.pressure_out%> Temperature Air: <%= @dive.temperature_air%> Water: <%= @dive.temperature_water%> </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+      <p>Buddies: <%= @dive.buddies %> </p>
+      <p>Comments: <%= @dive.comments %> </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+      Submitted <%= time_ago_in_words(@dive.created_at) %> ago
+      <br/>
+      <p class="date">
+        <% if diver_signed_in? && current_diver == @dive.diver%>
 
-<div class="row">
-  <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-
-
-    <p>Dive Number: <%= @dive.dive_number%> Date: <%= @dive.dive_date%></p>
-    <p>Location: <%= @dive.location%> Latitude: <%= @dive.latitude%> Longitude: <%= @dive.longitude%></p>
-    <p>Time In: <%= @dive.time_in.to_s(:time)%> Time Out: <%= @dive.time_out.to_s(:time)%> Bottom time: <%=@dive.bottom_time%> min</p>
-    <p>Depth: <%= @dive.depth%> Safety Stop: <%= @dive.safety_stop_minutes%> min</p>
-    <p>Pressure In: <%= @dive.pressure_in%> Out: <%= @dive.pressure_out%> Temperature Air: <%= @dive.temperature_air%> Water: <%= @dive.temperature_water%> </p>
-    <p>Buddies: <%= @dive.buddies %> </p>
-    <p>Comments: <%= @dive.comments %> </p>
-    Submitted <%= time_ago_in_words(@dive.created_at) %> ago
-    <br/>
-    <p class="date">
-      <% if diver_signed_in? && current_diver == @dive.diver%>
-
-      | <%= link_to "Edit", edit_diver_dive_path(@dive.diver_id, @dive.id) %>
-      | <%= link_to "Delete", diver_dive_path(@dive.diver_id, @dive.id), method: :delete %> |
-      <% end %>
-    </p>
+        | <%= link_to "Edit", edit_diver_dive_path(@dive.diver_id, @dive.id) %>
+        | <%= link_to "Delete", diver_dive_path(@dive.diver_id, @dive.id), method: :delete %> |
+        <% end %>
+      </p>
+    </div>
   </div>
 </div>

@@ -1,104 +1,70 @@
-<style type="text/css">
-  #map {
-  height: 40%;
-  width: 40%;
-}
-</style>
-
-<div id="map"></div>
+<div id="map-bubl-dive"></div>
 <script>
-    function initMap() {
-        var saveMarker = null;
+  function initMap() {
+    var saveMarker = null;
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 6,
-            center: {lat: <%= dive_lat %>, lng: <%= dive_long %>}
-        });
+    var map = new google.maps.Map(document.getElementById('map-bubl-dive'), {
+      zoom: 6,
+      center: {lat: <%= dive_lat %>, lng: <%= dive_long %>}
+    });
 
-        map.addListener('click', function(e) {
-//            placeInfoWindow(e.latLng, map);
-            if (saveMarker !== null){
-                saveMarker.setMap(null);
-                saveMarker = null;
-            }
-            var marker = new google.maps.Marker({
-                position: {lat: e.latLng.lat(), lng: e.latLng.lng()},
-                icon: 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png',
-                animation: google.maps.Animation.BOUNCE,
+    map.addListener('click', function(e) {
+      if (saveMarker !== null){
+          saveMarker.setMap(null);
+          saveMarker = null;
+      }
+      var marker = new google.maps.Marker({
+        position: {lat: e.latLng.lat(), lng: e.latLng.lng()},
+        icon: 'http://maps.google.com/mapfiles/ms/icons/pink-dot.png',
+        animation: google.maps.Animation.BOUNCE,
 //                animation: google.maps.Animation.DROP,
-                map: map
-            });
-
-            saveMarker = marker;
-
-            $('input[name="dive[latitude]"]').val(e.latLng.lat());
-            $('input[name="dive[longitude]"]').val(e.latLng.lng());
-        });
-    }
-
-    // function placeInfoWindow(latLng, map) {
-    //     var infoWindow = new google.maps.InfoWindow;
-    //     // Replace the info window's content and position.
-    //     infoWindow.setContent('Clicked location:<br>Lat: ' + latLng.lat() + '<br>Lng: ' + latLng.lng());
-    //     infoWindow.setPosition(latLng);
-    //     infoWindow.open(map);
-    //     map.panTo(latLng);
-    // }
+        map: map
+      });
+      saveMarker = marker;
+      $('input[name="dive[latitude]"]').val(e.latLng.lat());
+      $('input[name="dive[longitude]"]').val(e.latLng.lng());
+    });
+  }
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
 </script>
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+    <%= form_for :dive, url: {controller: 'dives', action: action}, method: method_var do |f| %>
+      <% if @dive.errors.any? %>
+        <div id="errors">
+          <h2><%= pluralize(@dive.errors.count, "error") %> prevented this dive from saving </h2>
+          <ul>
+            <% @dive.errors.full_messages.each do |msg| %>
+              <li> <%= msg %></li> 
+            <% end %> 
+          </ul>
+        </div>
+      <% end %>
+      <p>
+        <%= f.text_field :latitude, placeholder: "latitude" %>
+        <%= f.text_field :longitude, placeholder: "longitude" %>
+      </p>
+      <p>
+        <%= f.label :dive_date %> <%= f.date_field :dive_date%>
+        <%= f.label :location %> <%= f.text_field :location%></p>
+      <p> <%= f.label :time_in %> <%= f.time_field :time_in%> <%= f.label :time_out %> <%= f.time_field :time_out%>
+      </p>
+      <p>
+        <%= f.label :depth %> <%= f.number_field :depth%> <%= f.label :safety_stop_minutes %> <%= f.number_field :safety_stop_minutes%> <%= f.label :activity %> <%= f.collection_select :dive_types, DiveType.all, :id, :activity, include_blank: true, multiple: true %>
+      </p>
+      <p>
+        <%= f.label :pressure_in %> <%= f.number_field :pressure_in%> <%= f.label :pressure_out %> <%= f.number_field :pressure_out%>
+      </p>
+      <p>
+        <%= f.label :temperature_air %> <%= f.number_field :temperature_air%> <%= f.label :temperature_water %> <%= f.number_field :temperature_water%>
+      </p>
+      <p>
+      <%= f.label :comments %> <%= f.text_area :comments %> <%= f.label :buddies %> <%= f.text_field :buddies %> 
+      </p>
 
-<%= form_for :dive, url: {controller: 'dives', action: action}, method: method_var do |f| %>
-  <% if @dive.errors.any? %>
-    <div id="errors">
-      <h2><%= pluralize(@dive.errors.count, "error") %> prevented this dive from saving </h2>
-      <ul>
-        <% @dive.errors.full_messages.each do |msg| %>
-          <li> <%= msg %></li> 
-        <% end %> 
-      </ul>
-    </div>
-  <% end %>
-
-  <p>
-    <%= f.text_field :latitude, placeholder: "latitude" %>
-    <%= f.text_field :longitude, placeholder: "longitude" %>
-  </p>
-  <p>
-    <%= f.label :dive_date %> <%= f.date_field :dive_date%>
-  
-    <%= f.label :location %> <%= f.text_field :location%></p>
-  <p> <%= f.label :time_in %> <%= f.time_field :time_in%> <%= f.label :time_out %> <%= f.time_field :time_out%>
-  </p>
-  
-  <p>
-    <%= f.label :depth %> <%= f.number_field :depth%> <%= f.label :safety_stop_minutes %> <%= f.number_field :safety_stop_minutes%> <%= f.label :activity %> <%= f.collection_select :dive_types, DiveType.all, :id, :activity, include_blank: true, multiple: true %>
-  </p>
-  <p>
-    <%= f.label :pressure_in %> <%= f.number_field :pressure_in%> <%= f.label :pressure_out %> <%= f.number_field :pressure_out%>
-  </p>
-  <p>
-    <%= f.label :temperature_air %> <%= f.number_field :temperature_air%> <%= f.label :temperature_water %> <%= f.number_field :temperature_water%>
-  </p>
-  <p>
-  <%= f.label :comments %> <%= f.text_area :comments %> <%= f.label :buddies %> <%= f.text_field :buddies %> 
-  </p>
-
-  <%= f.submit "Save Dive", id: "btn" %>
-<% end %>
-
-
-    <!-- Initialize the plugin: -->
-<!--     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#example-getting-started').multiselect();
-        });
-    </script> -->
-
-
-<!--   validates :dive_number, presence: true
-  validates :dive_date, presence: true
-  validates :time_in, presence: true
-  validates :time_out, presence: true
-  validates :depth, presence: true -->
+      <%= f.submit "save dive", class: "btn-bubl form-control" %>
+    <% end %>
+  </div>
+</div>

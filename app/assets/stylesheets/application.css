@@ -13,20 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
-/* Always set the map height explicitly to define the size of the div
-* element that contains the map. */
-#map-bubl {
-  height: calc(100% - 50px);
-  width: 100%;
-}
 
 /* Optional: Makes the sample page fill the window. */
 html, body {
   height: 100%;
   width: 100%;
   font-family: 'Ubuntu', sans-serif;
+}
 
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map-bubl {
+  height: calc(100% - 50px);
+  width: 100%;
+}
+#map-bubl-dive {
+  height: 40%;
+  width: 85%;
 }
 
 .btn-bubl {

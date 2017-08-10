@@ -1,3 +1,7 @@
-<h1>new dive <%= current_diver.last_dive_number + 1%></h1>
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+    <h1>new dive <%= current_diver.last_dive_number + 1%></h1>
+  </div>
+</div>
 
 <%= render partial:'form', locals: {action: 'create', method_var: 'post', dive_lat: 20.5, dive_long: -87} %>
