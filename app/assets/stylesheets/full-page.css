@@ -67,11 +67,10 @@
     font-size: 110%;
     padding: 7px 15px;
   }
-  #map {
-    height: 50% !important;
-    width: 80% !important;
-    margin-left: 10% !important;
+  h1 {
+    top: 75px;
   }
+
 /*  p {
     font-size: 100%;
     line-height: 130%;
