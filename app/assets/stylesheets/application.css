@@ -58,9 +58,9 @@ body.homepage #page-header-wrapper {
 }
 
 .navbar {
-  background-image: image-url(bubl.jpg);
-/*  background-image: url(bubl.jpg);
-*/  background-position: center;
+/*  background-image: image-url(bubl.jpg);
+*/  background-image: url(bubl.jpg);
+  background-position: center;
   background-size: cover;
   border: 0px;
   border-radius: 0px;
