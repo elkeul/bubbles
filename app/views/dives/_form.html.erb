@@ -52,7 +52,8 @@
       <p> <%= f.label :time_in %> <%= f.time_field :time_in%> <%= f.label :time_out %> <%= f.time_field :time_out%>
       </p>
       <p>
-        <%= f.label :depth %> <%= f.number_field :depth%> <%= f.label :safety_stop_minutes %> <%= f.number_field :safety_stop_minutes%> <%= f.label :activity %> <%= f.collection_select :dive_types, DiveType.all, :id, :activity, include_blank: true, multiple: true %>
+        <%= f.label :depth %> <%= f.number_field :depth%> <%= f.label :safety_stop_minutes %> <%= f.number_field :safety_stop_minutes%> </p>
+      <p><%= f.label :activity %> <%= select_tag :dive_type_ids, options_for_select(DiveType.all.collect {|dt| [dt.activity, dt.id]}),:multiple => true,  :activity=>'[dive_type_ids][]' %>
       </p>
       <p>
         <%= f.label :pressure_in %> <%= f.number_field :pressure_in%> <%= f.label :pressure_out %> <%= f.number_field :pressure_out%>

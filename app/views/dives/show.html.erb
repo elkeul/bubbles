@@ -47,6 +47,11 @@
   </div>
   <div class="row">
     <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+      <p>Activity: <%= @dive.dive_types.map(&:activity).join(", ") %> </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
       Submitted <%= time_ago_in_words(@dive.created_at) %> ago
       <br/>
       <p class="date">

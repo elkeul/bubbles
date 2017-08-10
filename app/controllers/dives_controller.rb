@@ -17,6 +17,8 @@ class DivesController < ApplicationController
     @dive = Dive.new(dive_params.merge({diver_id: current_diver.id}))
     @dive.dive_number = current_diver.last_dive_number + 1
     @dive.bottom_time = (@dive.time_out - @dive.time_in ) / 60
+    dive_types = DiveType.find(params[:dive_type_ids]) rescue []
+    @dive.dive_types << dive_types
     if @dive.save
       flash[:notice] = "Dive successfully created!"
       redirect_to "/divers/#{current_diver.id}/dives/#{@dive.id}"
@@ -34,6 +36,8 @@ class DivesController < ApplicationController
     @dive = Dive.find(params[:id])
     # Devise check
     # if diver_signed_in? && current_diver == @dive.diver
+    dive_types = DiveType.find(params[:dive_type_ids]) rescue []
+    @dive.dive_types << dive_types
     if @dive.update_attributes(dive_params)
       redirect_to diver_dive_path(@dive.diver_id, @dive.id)
     else
@@ -58,4 +62,3 @@ class DivesController < ApplicationController
       :temperature_air, :temperature_water, :buddies, :comments)
   end
 end
-
