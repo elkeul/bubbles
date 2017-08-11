@@ -23,7 +23,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top <% if !diver_signed_in? && current_page?('/') %> transparent <% end %>">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -33,7 +33,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to 'bubl home', root_path, class: "navbar-brand" %>
+          <%= link_to 'bubl', root_path, class: "navbar-brand" %>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

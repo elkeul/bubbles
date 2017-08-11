@@ -1,58 +1,66 @@
-<h1 class="welcome"> welcome to bubl</h1>
+<% if diver_signed_in? %>
+    <div id="map-bubl"></div>
+    <script>
+        var locations = [
+            <% @dives.each do |dive| %>
+            [<%= dive.latitude%>, <%= dive.longitude%>, '<%= dive.location%> ', '<%= dive.comments[0..199]%>... <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %>'],
+            <% end %>
+        ]
 
-<div id="map-bubl"></div>
-<script>
-    var locations = [
-        <% @dives.each do |dive| %>
-        [<%= dive.latitude%>, <%= dive.longitude%>, '<%= dive.location%> ', '<%= dive.comments[0..199]%>... <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %>'],
-        <% end %>
-    ]
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map-bubl'), {
+                zoom: 2,
+                center: {lat: 20, lng:0}
+            });
 
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('map-bubl'), {
-            zoom: 2,
-            center: {lat: 20, lng:0}
-        });
+            // Create an array of alphabetical characters used to label the markers.
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-        // Create an array of alphabetical characters used to label the markers.
-        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            // Add some markers to the map.
+            // Note: The code uses the JavaScript Array.prototype.map() method to
+            // create an array of markers based on a given "locations" array.
+            // The map() method here has nothing to do with the Google Maps API.
 
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
+            var infoWindows = locations.map(function(location){
+                return new google.maps.InfoWindow({
+                    content: location[3],
+                    maxWidth: 200
+                })
+            });
 
-        var infoWindows = locations.map(function(location){
-            return new google.maps.InfoWindow({
-                content: location[3],
-                maxWidth: 200
+            var markers = locations.map(function(location, i) {
+                return new google.maps.Marker({
+                    position: {lat: location[0], lng: location[1]},
+                    title: location[2],
+                    label: labels[i % labels.length]
+                });
+            });
+
+            markers.map(function(marker, ii){
+                marker.addListener('click', function() {
+                    for (i = 0; i < infoWindows.length; i++) {
+                        infoWindows[i].close();
+                    }
+                    infoWindows[ii].open(map, marker);
+                });
             })
-        });
 
-        var markers = locations.map(function(location, i) {
-            return new google.maps.Marker({
-                position: {lat: location[0], lng: location[1]},
-                title: location[2],
-                label: labels[i % labels.length]
-            });
-        });
-
-        markers.map(function(marker, ii){
-            marker.addListener('click', function() {
-                for (i = 0; i < infoWindows.length; i++) {
-                    infoWindows[i].close();
-                }
-                infoWindows[ii].open(map, marker);
-            });
-        })
-
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-    }
-</script>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-</script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
-</script>
+            // Add a marker clusterer to manage the markers.
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        }
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
+    </script>
+<% else %>
+  <section class="fp-intro">
+        <div class="fp-inner">
+            <div class="fp-content">
+                <h1>blown bubble (b)log</h1>
+            </div>
+        </div>
+    </section>
+<% end %>

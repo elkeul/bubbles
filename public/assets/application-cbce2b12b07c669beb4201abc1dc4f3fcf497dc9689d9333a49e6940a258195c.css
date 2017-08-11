@@ -1,4 +1,45 @@
-/assets/stylesheets/application.css
+.fp-intro {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  background: url(bubl.jpg) no-repeat 50% 50%;
+  display: table;
+  top: 0;
+  background-size: cover;
+}
+.fp-intro .fp-inner {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  max-width: none;
+}
+.fp-content {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+.fp-content h1 {
+  font-family: 'Ubuntu', sans-serif;
+  color: #016F8A;
+  text-shadow: 0px 0px 300px #000;
+  font-size: 600%;
+  margin-top: 50px;
+}
+.margin-top {
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .fp-content h1 {
+    font-size: 450%;
+    max-width: 200px;
+    margin-left: calc(50% - 100px);
+  }
+  h1 {
+    top: 75px;
+  }
+}
+/*/assets/stylesheets/application.css*/
 /* Adding a comment to force a new digest and expire cached assets in browsers */
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -12,9 +53,10 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+
+
  */
+
 
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
@@ -29,12 +71,12 @@ html, body {
 * element that contains the map. */
 #map-bubl {
   height: calc(100% - 50px);
-/*  height: 100%;
-*/  width: 100%;
+  width: 100%;
+  margin-top: 50px
 }
 #map-bubl-dive {
-  height: 40%;
-  width: 85%;
+  height: 400px;
+  width: 100%;
 }
 
 .btn-bubl {
@@ -65,9 +107,8 @@ body.homepage #page-header-wrapper {
   display: none !important;
 }
 
-.navbar {
-/*  background-image: image-url(bubl.jpg);
-*/  background-image: url(bubl.jpg);
+.navbar { 
+  background-image: url(bubl.jpg);
   background-position: center;
   background-size: cover;
   border: 0px;
@@ -84,12 +125,16 @@ a.form-control {
   text-align: center;
 }
 
-h1.welcome {
-  position: fixed;
-  z-index: 100;
-  left: calc(50% - 135px);
-}
-
 .form-rb {
   display: inline-block;
+}
+
+.navbar.transparent {
+  background: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  #map-bubl-dive {
+    height: 300px;
+  }
 }

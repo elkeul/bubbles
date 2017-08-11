@@ -29,12 +29,12 @@ html, body {
 * element that contains the map. */
 #map-bubl {
   height: calc(100% - 50px);
-/*  height: 100%;
-*/  width: 100%;
+  width: 100%;
+  margin-top: 50px
 }
 #map-bubl-dive {
-  height: 40%;
-  width: 85%;
+  height: 400px;
+  width: 100%;
 }
 
 .btn-bubl {
@@ -65,9 +65,8 @@ body.homepage #page-header-wrapper {
   display: none !important;
 }
 
-.navbar {
-/*  background-image: image-url(bubl.jpg);
-*/  background-image: url(bubl.jpg);
+.navbar { 
+  background-image: url(bubl.jpg);
   background-position: center;
   background-size: cover;
   border: 0px;
@@ -84,12 +83,16 @@ a.form-control {
   text-align: center;
 }
 
-h1.welcome {
-  position: fixed;
-  z-index: 100;
-  left: calc(50% - 135px);
-}
-
 .form-rb {
   display: inline-block;
+}
+
+.navbar.transparent {
+  background: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  #map-bubl-dive {
+    height: 300px;
+  }
 }

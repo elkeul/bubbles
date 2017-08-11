@@ -1,33 +1,12 @@
-<div class="row">
+<div class="container-fluid">
+<div class="row margin-top">
   <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
     <h2> location: <%= @dive.location %> </h2>
-  </div>
-</div>
-<div id="map-bubl-dive">
-  <script>
-    var dive_latlng = {lat: <%= @dive.latitude%>, lng: <%= @dive.longitude%>}
-    var dive_location = '<%= @dive.location%>'
-
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('map-bubl-dive'), {
-        zoom: 4,
-        center: dive_latlng
-      });
-
-      var diveMarker = new google.maps.Marker({
-        position: dive_latlng,
-        title: dive_location,
-        map: map
-      });
-    }
-  </script>
-  <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
-  </script>
-</div>    
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+<!--   </div>
+</div> -->
+      <div id="map-bubl-dive"></div>    
+<!--   <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-xs-10  col-xs-offset-1"> -->
       <p>Dive Number: <%= @dive.dive_number%> Date: <%= @dive.dive_date%></p>
       <p>Location: <%= @dive.location%> Latitude: <%= @dive.latitude%> Longitude: <%= @dive.longitude%></p>
     </div>
@@ -64,3 +43,23 @@
     </div>
   </div>
 </div>
+<script>
+  var dive_latlng = {lat: <%= @dive.latitude%>, lng: <%= @dive.longitude%>}
+  var dive_location = '<%= @dive.location%>'
+
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map-bubl-dive'), {
+      zoom: 4,
+      center: dive_latlng
+    });
+
+    var diveMarker = new google.maps.Marker({
+      position: dive_latlng,
+      title: dive_location,
+      map: map
+    });
+  }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZuRqWqKV7OQtNH8MXE1GF1RkqrLolUDM&callback=initMap">
+</script>
