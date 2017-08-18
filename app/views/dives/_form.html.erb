@@ -47,22 +47,22 @@
         <%= f.text_field :longitude, placeholder: "longitude" %>
       </p>
       <p>
-        <%= f.label :dive_date %> <%= f.date_field :dive_date%>
-        <%= f.label :location %> <%= f.text_field :location%></p>
-      <p> <%= f.label :time_in %> <%= f.time_field :time_in%> <%= f.label :time_out %> <%= f.time_field :time_out%>
+        <%= f.label :dive_date, 'date' %> <%= f.date_field :dive_date%>
+        <%= f.label :location, 'location' %> <%= f.text_field :location%></p>
+      <p> <%= f.label :time_in, 'time in' %> <%= f.time_field :time_in%> <%= f.label :time_out, 'time out' %> <%= f.time_field :time_out%>
       </p>
       <p>
-        <%= f.label :depth %> <%= f.number_field :depth%> <%= f.label :safety_stop_minutes %> <%= f.number_field :safety_stop_minutes%> </p>
-      <p><%= f.label :activity %> <%= select_tag :dive_type_ids, options_for_select(DiveType.all.collect {|dt| [dt.activity, dt.id]}),:multiple => true,  :activity=>'[dive_type_ids][]' %>
+        <%= f.label :depth, 'depth' %> <%= f.number_field :depth%> <%= f.label :safety_stop_minutes, 'safety stop in minutes' %> <%= f.number_field :safety_stop_minutes%> </p>
+      <p><%= f.label :activity, 'activity' %> <%= select_tag :dive_type_ids, options_for_select(DiveType.all.collect {|dt| [dt.activity, dt.id]}),:multiple => true,  :activity=>'[dive_type_ids][]' %>
       </p>
       <p>
-        <%= f.label :pressure_in %> <%= f.number_field :pressure_in%> <%= f.label :pressure_out %> <%= f.number_field :pressure_out%>
+        <%= f.label :pressure_in, 'pressure in' %> <%= f.number_field :pressure_in%> <%= f.label :pressure_out, 'pressure out' %> <%= f.number_field :pressure_out%>
       </p>
       <p>
-        <%= f.label :temperature_air %> <%= f.number_field :temperature_air%> <%= f.label :temperature_water %> <%= f.number_field :temperature_water%>
+        <%= f.label :temperature_air, 'temperature air' %> <%= f.number_field :temperature_air%> <%= f.label :temperature_water, 'temperature water' %> <%= f.number_field :temperature_water%>
       </p>
       <p>
-      <%= f.label :comments %> <%= f.text_area :comments %> <%= f.label :buddies %> <%= f.text_field :buddies %> 
+      <%= f.label :comments, 'comments' %> <%= f.text_area :comments %> <%= f.label :buddies, 'buddies' %> <%= f.text_field :buddies %> 
       </p>
 
       <%= f.submit "save dive", class: "btn-bubl form-control" %>

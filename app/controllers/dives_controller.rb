@@ -2,11 +2,33 @@ class DivesController < ApplicationController
   # before_action :authenticate_user!
 
   def index
-    @dives = Diver.find(params[:diver_id]).dives.order(dive_number: :desc)
+    @dives = Diver.find(params[:diver_id]).dives.order(dive_number: :desc).to_a
+    
+    if params[:dive_types].present?
+      @dives.select! { |dive| dive.dive_types.map(&:id).include?(params[:dive_types].to_i) }  
+    end
+    if params[:location].present?
+      @dives.select! { |dive| dive.location.downcase.include?(params[:location].downcase)}
+    end
+    if params[:depth_min].present?
+      @dives.select! { |dive| dive.depth >= (params[:depth_min].to_i)}
+    end
+    if params[:depth_max].present?
+      @dives.select! { |dive| dive.depth <= (params[:depth_max].to_i)}
+    end
+    if params[:bottom_time_min].present?
+      @dives.select! { |dive| dive.bottom_time >= (params[:bottom_time_min].to_i)}
+    end
+    if params[:bottom_time_max].present?
+      @dives.select! { |dive| dive.bottom_time <= (params[:bottom_time_max].to_i)}
+    end
   end
 
   def show
     @dive = Dive.find(params[:id])
+  end
+
+  def search
   end
 
   def new

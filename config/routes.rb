@@ -20,4 +20,6 @@ Rails.application.routes.draw do
     resources :dives
   end
   resources :dive_types
+
+  get "search", to: "dives#search"
 end
