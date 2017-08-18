@@ -2,7 +2,7 @@
   <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
     <% if diver_signed_in? %>
       <h2>welcome <%= current_diver.email %></h2>
-      <%= link_to 'logged in [click to log out]', destroy_diver_session_path, :method => :delete, class: "btn-bubl" %>
+      <%= link_to 'logged in [click to log out]', destroy_diver_session_path, :method => :delete, class: "btn-bubl form-control" %>
     <% else %>
       <h2>You are not logged in.</h2>
       <div>

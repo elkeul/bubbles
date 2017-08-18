@@ -9,7 +9,7 @@
     <p>certification: <%= certs[@diver.certification] %> </p>
     <br>
     <p>last dive number: <%= @diver.last_dive_number %> </p>
-    <p>total bottom time: <%= @diver.total_bottom_time %> </p>
+    <p>total bottom time: <%= @diver.total_bottom_time / 60 %> hr <%= @diver.total_bottom_time % 60 %> min</p>
     <br>
     submitted <%= time_ago_in_words(@diver.created_at) %> ago
   </div>
