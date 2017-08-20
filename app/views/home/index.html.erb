@@ -3,7 +3,7 @@
     <script>
         var locations = [
             <% @dives.each do |dive| %>
-            [<%= dive.latitude%>, <%= dive.longitude%>, '<%= dive.location%> ', '<%= dive.comments[0..199]%>... <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %>'],
+            [<%= dive.latitude%>, <%= dive.longitude%>, '<%= dive.location%> ', '<%= dive.comments[0..199].html_safe%>... <%= link_to dive.location, controller:'dives', action:'show', diver_id: dive.diver_id, id:dive.id %>'],
             <% end %>
         ]
 

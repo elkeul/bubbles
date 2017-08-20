@@ -34,6 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'trix', '~> 0.11.0'
 gem 'paperclip', '~> 5.1'
 
 group :development, :test do
