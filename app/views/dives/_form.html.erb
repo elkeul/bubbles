@@ -42,8 +42,7 @@
           </ul>
         </div>
       <% end %>
-<!--       <input id="trixie" type="hidden" name="content">
-      <trix-editor input="trixie"></trix-editor> -->
+
       <p>
         <%= f.text_field :latitude, placeholder: "latitude" %>
         <%= f.text_field :longitude, placeholder: "longitude" %>
@@ -64,7 +63,7 @@
         <%= f.label :temperature_air, 'temperature air' %> <%= f.number_field :temperature_air%> <%= f.label :temperature_water, 'temperature water' %> <%= f.number_field :temperature_water%>
       </p>
       <p>
-      <%= f.label :comments, 'comments' %> <%= f.trix_editor :comments %> <%= f.label :buddies, 'buddies' %> <%= f.text_field :buddies %> 
+      <%= f.label :comments, 'comments' %> <%= f.text_field :comments %> <%= f.label :buddies, 'buddies' %> <%= f.text_field :buddies %> 
       </p>
 
       <%= f.submit "save dive", class: "btn-bubl form-control" %>
