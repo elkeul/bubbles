@@ -10,7 +10,7 @@
       <p><%= label_tag 'bottom_time_min', 'bottom time minimum'%>  <%= number_field_tag 'bottom_time_min', nil, placeholder: 'Enter bottom time...'%></p>
       <p><%= label_tag 'bottom_time_max', 'bottom time maximum'%>  <%= number_field_tag 'bottom_time_max', nil, placeholder: 'Enter bottom time...'%></p>
 
-      <p><%= label_tag 'activity', 'activity'%>  <%= select_tag "dive_types", options_from_collection_for_select(DiveType.all, "id", "activity"), prompt: "Dive Type"%></p>
+      <p><%= label_tag 'activity', 'activity'%>  <%= select_tag "dive_types", options_from_collection_for_select(DiveType.all, "id", "activity"), prompt: "dive type"%></p>
       <div><%= submit_tag 'search', class: "btn-bubl form-control" %></div>
       <% end -%>
   </div>
